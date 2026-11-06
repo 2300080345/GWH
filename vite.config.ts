@@ -145,7 +145,19 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
           });
         }
         if (favicon) {
-          tags.push({ tag: "link", attrs: { rel: "icon", href: favicon }, injectTo: "head" });
+          const faviconUrl = `${favicon}${favicon.includes("?") ? "&" : "?"}v=2`;
+          tags.push(
+            {
+              tag: "link",
+              attrs: { rel: "icon", type: "image/png", href: faviconUrl },
+              injectTo: "head",
+            },
+            {
+              tag: "link",
+              attrs: { rel: "apple-touch-icon", href: faviconUrl },
+              injectTo: "head",
+            },
+          );
         }
         if (title) {
           tags.push({
